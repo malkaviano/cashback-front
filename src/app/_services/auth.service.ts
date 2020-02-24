@@ -19,7 +19,7 @@ export class AuthService {
                 r => {
                     this.setSession(r);
 
-                    this.router.navigate([ '/cashback' ]);
+                    this.router.navigate([ '/home' ]);
                 },
                 e => {
                     console.error("Login Failed");
@@ -30,6 +30,8 @@ export class AuthService {
     logout(): void {
         localStorage.removeItem('token');
         localStorage.removeItem('unique_name');
+
+        this.router.navigate([ '/home' ]);
     }
 
     isLoggedIn(): boolean {

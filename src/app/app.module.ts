@@ -14,6 +14,7 @@ import { NavComponent } from './nav/nav.component';
 import { TitleComponent } from './title/title.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './_services/auth.service';
+import { HomeComponent } from './home/home.component';
 
 const LOGIN_URL = "http://localhost/api/auth/login";
 const SERVER_URL = "http://localhost/api";
@@ -26,7 +27,8 @@ const SERVER_URL = "http://localhost/api";
     SalesComponent,
     NavComponent,
     TitleComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
