@@ -4,8 +4,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { CashbackComponent } from './cashback/cashback.component';
 import { ResellerComponent } from './reseller/reseller.component';
 import { SalesComponent } from './sales/sales.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
+  { path: 'login', component: LoginComponent },
   { path: 'cashback', component: CashbackComponent },
   { path: 'reseller', component: ResellerComponent },
   { path: 'sales', component: SalesComponent },
@@ -13,6 +15,7 @@ const routes: Routes = [
     redirectTo: '/cashback',
     pathMatch: 'full'
   },
+  {path: '**', redirectTo: '/cashback' }
 ];
 
 @NgModule({
