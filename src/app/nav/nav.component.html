@@ -19,7 +19,7 @@
         </ul>
 
         <div class="form-inline my-2 my-lg-0" *ngIf="auth.isLoggedIn()">
-            Welcome <span class="my-2 my-sm-0">{{ auth.userName() }}</span>
+            Welcome <span class="d-block p-2">{{ auth.userName() }}</span>
             <button class="btn btn-outline-success my-2 my-sm-0" (click)="onClickLogout($event)">Logout</button>
         </div>
         <div class="form-inline my-2 my-lg-0" *ngIf="!auth.isLoggedIn()">

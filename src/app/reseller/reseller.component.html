@@ -1,1 +1,67 @@
-<p>reseller works!</p>
+<app-title [title]="title"></app-title>
+
+<div class="container">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+        <div class="form-group">
+            <label for="cpf" class="sr-only">CPF</label>
+            <input type="text" id="cpf" class="form-control" placeholder="cpf" name="cpf" onlyDigits=true maxlength="11"
+                minlength="11" required ngModel #cpf="ngModel">
+            <div *ngIf="cpf.invalid && (cpf.dirty || cpf.touched)" class="alert alert-danger">
+                <div *ngIf="cpf.errors.required">
+                    CPF is required.
+                </div>
+                <div *ngIf="cpf.errors.minlength">
+                    CPF must be 11 digits long.
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="name" class="sr-only">name</label>
+            <input type="text" id="name" class="form-control" placeholder="name" name="name" ngModel #name="ngModel"
+                maxlength="50" minlength="3" required [pattern]="'^[a-zA-Z]{1}[a-zA-Z .]*'">
+            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+                <div *ngIf="name.errors.required">
+                    name is required.
+                </div>
+                <div *ngIf="name.errors.minlength">
+                    name must be at least 3 characters long.
+                </div>
+                <div *ngIf="name.errors.pattern">
+                    name must be letters only.
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email" class="sr-only">email</label>
+            <input type="email" id="email" class="form-control" placeholder="email" name="email" ngModel
+                #email="ngModel" maxlength="50" required email>
+            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+                <div *ngIf="email.errors.required">
+                    email is required.
+                </div>
+                <div *ngIf="email.errors.email">
+                    email must be valid.
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="sr-only">password</label>
+            <input type="password" id="password" class="form-control" placeholder="password" name="password" ngModel
+                #password="ngModel" maxlength="50" minlength="6" required>
+            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+                <div *ngIf="password.errors.required">
+                    password is required.
+                </div>
+                <div *ngIf="password.errors.minlength">
+                    password must be at least 6 characters long.
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="mx-auto p-2 btn-group" role="group">
+                <button type="submit" class="btn btn-success" [disabled]="!f.valid">Create</button>
+            </div>
+        </div>
+    </form>
+
+</div>
