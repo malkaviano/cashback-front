@@ -21,7 +21,7 @@ export class ResellerComponent implements OnInit {
   onSubmit(form: any): void {
     this.http.post(this.url, form)
       .subscribe(
-        done => this.toastr.success("Reseller created"),
+        _ => this.toastr.success("Reseller created"),
         error => {
           console.error(error);
 

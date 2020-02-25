@@ -1,0 +1,71 @@
+<div class="modal-header">
+    <h5 class="modal-title" id="formModalLabel">{{title}}</h5>
+    <button type="button" class="close" aria-label="Close" (click)="onClose()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="salesForm" (ngSubmit)="onSave(salesForm.value)">
+        <div class="form-group">
+            <label for="cpf" class="sr-only">User</label>
+            <input type="text" id="cpf" class="form-control" placeholder="cpf" name="cpf"
+                [formControl]="salesForm.controls['cpf']" maxlength="11" onlyDigits=true>
+            <div *ngIf="salesForm.controls['cpf'].invalid && (salesForm.controls['cpf'].dirty || salesForm.controls['cpf'].touched)"
+                class="alert alert-danger">
+                <div *ngIf="salesForm.controls['cpf'].errors.required">
+                    cpf is required.
+                </div>
+                <div *ngIf="salesForm.controls['cpf'].errors.maxlength">
+                    cpf must be 11 digits.
+                </div>
+                <div *ngIf="salesForm.controls['cpf'].errors.minlength">
+                    cpf must be 11 digits.
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="code" class="sr-only">code</label>
+            <input type="text" id="code" class="form-control" placeholder="code" name="code"
+                [formControl]="salesForm.controls['code']" maxlength="20">
+            <div *ngIf="salesForm.controls['code'].invalid && (salesForm.controls['code'].dirty || salesForm.controls['code'].touched)"
+                class="alert alert-danger">
+                <div *ngIf="salesForm.controls['code'].errors.required">
+                    code is required.
+                </div>
+                <div *ngIf="salesForm.controls['code'].errors.minlength">
+                    code be at least 4 characters long.
+                </div>
+                <div *ngIf="salesForm.controls['code'].errors.maxlength">
+                    code be at most 20 characters long.
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="value" class="sr-only">value</label>
+            <input type="number" id="value" class="form-control" placeholder="value" name="value"
+                [formControl]="salesForm.controls['value']" maxlength="20">
+            <div *ngIf="salesForm.controls['value'].invalid && (salesForm.controls['value'].dirty || salesForm.controls['value'].touched)"
+                class="alert alert-danger">
+                <div *ngIf="salesForm.controls['value'].errors.required">
+                    value is required.
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="data" class="sr-only">data</label>
+            <input id="data" name="data" placeholder="01/01/2000 10:10:10" class="form-control"
+                #datepickerFull="bsDatepicker" bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY HH:mm:ss' }"
+                [formControl]="salesForm.controls['data']" maxlength="20">
+            <div *ngIf="salesForm.controls['data'].invalid && (salesForm.controls['data'].dirty || salesForm.controls['data'].touched)"
+                class="alert alert-danger">
+                <div *ngIf="salesForm.controls['data'].errors.required">
+                    data is required.
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="onClose()">Close</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!salesForm.valid">Save</button>
+        </div>
+    </form>
+</div>

@@ -1,36 +1,41 @@
+<app-title [title]="title"></app-title>
+
 <div class="content">
     <div class="mx-auto p-2 btn-group" role="group">
-        <button type="button" class="btn btn-success">Create</button>
+        <button type="button" class="btn btn-success" (click)="openModal()">Create</button>
     </div>
 
     <div class="m-4">
         <table class="table">
             <thead>
                 <tr>
+                    <th scope="col">CPF</th>
                     <th scope="col">Code</th>
                     <th scope="col">Value</th>
                     <th scope="col">Cashback Value</th>
-                    <th scope="col">Cashback Precentage</th>
+                    <th scope="col">Cashback Pecentage</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Date</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
+                <tr *ngFor="let sale of sales">
+                    <td>{{sale.cpf}}</td>
+                    <td>{{sale.code}}</td>
+                    <td>{{sale.value | currency:'BRL'}}</td>
+                    <td>{{sale.cashbackValue | currency:'BRL'}}</td>
+                    <td>{{sale.cashbackPercentage / 100 | percent}}</td>
+                    <td>{{sale.status}}</td>
+                    <td>{{sale.data | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                    <td>
+                        <button class="btn btn-success" (click)="openModal(sale)">
+                            <fa-icon [icon]="faEdit"></fa-icon>
+                        </button>
+                        <button class="btn btn-danger" (click)="delete(sale.code)">
+                            <fa-icon [icon]="faEraser"></fa-icon>
+                        </button>
+                    </td>
                 </tr>
             </tbody>
         </table>
