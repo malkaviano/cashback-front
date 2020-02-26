@@ -7,6 +7,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 
 import { Sales } from './shared/models/sales.model';
 import { FormComponent } from './shared/forms/form.component';
+import { ConfirmComponent } from '../_shared/modals/confirm/confirm.component';
 
 @Component({
   selector: 'app-sales',
@@ -19,6 +20,7 @@ export class SalesComponent implements OnInit {
   public faEdit = faEdit;
   public faEraser = faEraser;
   public bsModalRef: BsModalRef;
+  public dialogRef: BsModalRef;
 
   constructor(
     private http: HttpClient,
@@ -53,6 +55,16 @@ export class SalesComponent implements OnInit {
         this.update(result);
       } else {
         this.create(result);
+      }
+    });
+  }
+
+  openDialog(code: string): void {
+    this.dialogRef = this.modalService.show(ConfirmComponent);
+
+    this.dialogRef.content.notifyParent.subscribe((result) => {
+      if (result) {
+        this.delete(code);
       }
     });
   }

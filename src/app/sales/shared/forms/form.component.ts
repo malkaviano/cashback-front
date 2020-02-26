@@ -22,8 +22,7 @@ export class FormComponent implements OnInit {
 
   constructor(
     public bsModalRef: BsModalRef,
-    private fb: FormBuilder,
-    private localeService: BsLocaleService
+    private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {

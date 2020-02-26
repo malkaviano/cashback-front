@@ -24,6 +24,7 @@ import { AuthService } from './_services/auth.service';
 import { HomeComponent } from './home/home.component';
 import { OnlyNumbersDirective } from './_helpers/only-numbers.directive';
 import { FormComponent } from './sales/shared/forms/form.component';
+import { ConfirmComponent } from './_shared/modals/confirm/confirm.component';
 
 const LOGIN_URL = "http://localhost/api/auth/login";
 const SERVER_URL = "http://localhost/api";
@@ -43,7 +44,8 @@ registerLocaleData(pt);
     LoginComponent,
     HomeComponent,
     OnlyNumbersDirective,
-    FormComponent
+    FormComponent,
+    ConfirmComponent
   ],
   imports: [
     BrowserModule,
