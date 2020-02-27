@@ -2,14 +2,14 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { BsLocaleService } from 'ngx-bootstrap';
+import { CustomValidators } from 'ngx-custom-validators';
 
 @Component({
   selector: 'app-form',
-  templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  templateUrl: './sale-form.component.html',
+  styleUrls: ['./sale-form.component.css']
 })
-export class FormComponent implements OnInit {
+export class SaleFormComponent implements OnInit {
   public salesForm: FormGroup;
   public title: string;
   public cpf: string;
@@ -28,9 +28,9 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {
     this.salesForm = this.fb.group({
       'cpf': new FormControl({ value: this.cpf, disabled: this.update}, [Validators.required, Validators.minLength(11), Validators.maxLength(11)]),
-      'value': new FormControl(this.value, [Validators.required]),
+      'value': new FormControl(this.value, [Validators.required, CustomValidators.number]),
       'code': new FormControl({ value: this.code, disabled: this.update}, [Validators.required, Validators.minLength(4), Validators.maxLength(20)]),
-      'data': new FormControl(this.data, [Validators.required])
+      'data': new FormControl(this.data, [Validators.required, CustomValidators.date])
     });
   }
 
@@ -39,6 +39,8 @@ export class FormComponent implements OnInit {
   }
 
   onSave(form: any): void {
+    if (!this.salesForm.valid) return;
+
     this.notifyParent.emit(form);
 
     this.onClose();

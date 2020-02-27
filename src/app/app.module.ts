@@ -8,9 +8,10 @@ import { registerLocaleData } from '@angular/common';
 
 import { JwtModule } from "@auth0/angular-jwt";
 import { ToastrModule } from 'ngx-toastr';
-import { ModalModule, BsModalRef } from 'ngx-bootstrap';
+import { ModalModule } from 'ngx-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { CustomFormsModule } from 'ngx-custom-validators';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,8 +23,7 @@ import { TitleComponent } from './title/title.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './_services/auth.service';
 import { HomeComponent } from './home/home.component';
-import { OnlyNumbersDirective } from './_helpers/only-numbers.directive';
-import { FormComponent } from './sales/shared/forms/form.component';
+import { SaleFormComponent } from './_shared/modals/forms/sale-form.component';
 import { ConfirmComponent } from './_shared/modals/confirm/confirm.component';
 
 const LOGIN_URL = "http://localhost/api/auth/login";
@@ -43,8 +43,7 @@ registerLocaleData(pt);
     TitleComponent,
     LoginComponent,
     HomeComponent,
-    OnlyNumbersDirective,
-    FormComponent,
+    SaleFormComponent,
     ConfirmComponent
   ],
   imports: [
@@ -65,7 +64,8 @@ registerLocaleData(pt);
     ToastrModule.forRoot(),
     FontAwesomeModule,
     ModalModule.forRoot(),
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    CustomFormsModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt' },
@@ -74,7 +74,6 @@ registerLocaleData(pt);
     { provide: 'LOGIN_URL', useValue: LOGIN_URL },
     { provide: 'RESELLER_URL', useValue: RESELLER_URL },
     { provide: 'SALES_URL', useValue: SALES_URL },
-    BsModalRef
   ],
   bootstrap: [AppComponent]
 })

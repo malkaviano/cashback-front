@@ -5,8 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 import { faEdit, faEraser } from '@fortawesome/free-solid-svg-icons';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 
-import { Sales } from './shared/models/sales.model';
-import { FormComponent } from './shared/forms/form.component';
+import { Sales } from '../_shared/models/sales.model';
+import { SaleFormComponent } from '../_shared/modals/forms/sale-form.component';
 import { ConfirmComponent } from '../_shared/modals/confirm/confirm.component';
 
 @Component({
@@ -48,7 +48,7 @@ export class SalesComponent implements OnInit {
     };
 
 
-    this.bsModalRef = this.modalService.show(FormComponent, { initialState });
+    this.bsModalRef = this.modalService.show(SaleFormComponent, { initialState });
 
     this.bsModalRef.content.notifyParent.subscribe((result) => {
       if (sale) {

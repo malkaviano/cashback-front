@@ -5,21 +5,15 @@
     </button>
 </div>
 <div class="modal-body">
-    <form [formGroup]="salesForm" (ngSubmit)="onSave(salesForm.value)">
+    <form [formGroup]="salesForm" (ngSubmit)="onSave(salesForm.value)" class="form">
         <div class="form-group">
             <label for="cpf" class="sr-only">User</label>
-            <input type="text" id="cpf" class="form-control" placeholder="cpf" name="cpf"
-                [formControl]="salesForm.controls['cpf']" maxlength="11" onlyDigits=true>
+            <input type="number" id="cpf" class="form-control" placeholder="cpf" name="cpf"
+                [formControl]="salesForm.controls['cpf']">
             <div *ngIf="salesForm.controls['cpf'].invalid && (salesForm.controls['cpf'].dirty || salesForm.controls['cpf'].touched)"
                 class="alert alert-danger">
                 <div *ngIf="salesForm.controls['cpf'].errors.required">
                     cpf is required.
-                </div>
-                <div *ngIf="salesForm.controls['cpf'].errors.maxlength">
-                    cpf must be 11 digits.
-                </div>
-                <div *ngIf="salesForm.controls['cpf'].errors.minlength">
-                    cpf must be 11 digits.
                 </div>
             </div>
         </div>

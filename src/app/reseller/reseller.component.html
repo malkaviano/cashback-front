@@ -4,14 +4,10 @@
     <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
         <div class="form-group">
             <label for="cpf" class="sr-only">CPF</label>
-            <input type="text" id="cpf" class="form-control" placeholder="cpf" name="cpf" onlyDigits=true maxlength="11"
-                minlength="11" required ngModel #cpf="ngModel">
+            <input type="number" id="cpf" class="form-control" placeholder="cpf" name="cpf" required ngModel #cpf="ngModel">
             <div *ngIf="cpf.invalid && (cpf.dirty || cpf.touched)" class="alert alert-danger">
                 <div *ngIf="cpf.errors.required">
                     CPF is required.
-                </div>
-                <div *ngIf="cpf.errors.minlength">
-                    CPF must be 11 digits long.
                 </div>
             </div>
         </div>
