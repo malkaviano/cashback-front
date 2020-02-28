@@ -1,35 +1,33 @@
-// import { TestBed, async } from '@angular/core/testing';
-// import { RouterTestingModule } from '@angular/router/testing';
-// import { AppComponent } from './app.component';
+import { TestBed, async } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
-// describe('AppComponent', () => {
-//   beforeEach(async(() => {
-//     TestBed.configureTestingModule({
-//       imports: [
-//         RouterTestingModule
-//       ],
-//       declarations: [
-//         AppComponent
-//       ],
-//     }).compileComponents();
-//   }));
+import { MockComponent } from 'ng-mocks';
 
-//   it('should create the app', () => {
-//     const fixture = TestBed.createComponent(AppComponent);
-//     const app = fixture.componentInstance;
-//     expect(app).toBeTruthy();
-//   });
+import { AppComponent } from './app.component';
+import { NavComponent } from './nav/nav.component';
 
-//   it(`should have as title 'cashback-front'`, () => {
-//     const fixture = TestBed.createComponent(AppComponent);
-//     const app = fixture.componentInstance;
-//     expect(app.title).toEqual('cashback-front');
-//   });
+describe('AppComponent', () => {
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule
+      ],
+      declarations: [
+        AppComponent,
+        MockComponent(NavComponent)
+      ]
+    }).compileComponents();
+  }));
 
-//   it('should render title', () => {
-//     const fixture = TestBed.createComponent(AppComponent);
-//     fixture.detectChanges();
-//     const compiled = fixture.nativeElement;
-//     expect(compiled.querySelector('.content span').textContent).toContain('cashback-front app is running!');
-//   });
-// });
+  it('should create the app', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app).toBeTruthy();
+  });
+
+  it(`should have as title 'cashback-front'`, () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app.title).toEqual('cashback-front');
+  });
+});
