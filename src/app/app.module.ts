@@ -31,6 +31,8 @@ const SERVER_URL = "http://localhost/api";
 const RESELLER_URL = "http://localhost/api/reseller";
 const SALES_URL = "http://localhost/api/sales";
 const CASHBACK_URL = `${SERVER_URL}/cashback`;
+const DEFAULT_PAGE = "/home";
+const AUTH_PAGE = "/login";
 
 registerLocaleData(pt);
 
@@ -75,6 +77,8 @@ registerLocaleData(pt);
     { provide: 'LOGIN_URL', useValue: LOGIN_URL },
     { provide: 'RESELLER_URL', useValue: RESELLER_URL },
     { provide: 'SALES_URL', useValue: SALES_URL },
+    { provide: 'DEFAULT_PAGE', useValue: DEFAULT_PAGE },
+    { provide: 'AUTH_PAGE', useValue: AUTH_PAGE }
   ],
   bootstrap: [AppComponent]
 })

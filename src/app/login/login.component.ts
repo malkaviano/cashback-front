@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
 
 import { AuthService } from '../_services/auth.service';
+import { RoutingService } from '../_services/router/routing.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
-    private router: Router
+    private routingService: RoutingService
   ) {
     this.title = "Login";
 
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.auth.isLoggedIn()) {
-      this.router.navigate([ '/home' ]);
+      this.routingService.navTo(this.routingService.defaultPath());
     }
   }
 
