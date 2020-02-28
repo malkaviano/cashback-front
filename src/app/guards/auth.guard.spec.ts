@@ -1,25 +1,30 @@
 import { TestBed } from '@angular/core/testing';
-import { Router, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing'
+import { RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
+
+import { instance, mock, when } from 'ts-mockito';
 
 import { AuthGuard } from './auth.guard';
 import { AuthService } from '../_services/auth.service';
 
-const routerSpy = jasmine.createSpyObj('Router', ['parseUrl']);
-const authServiceSpy = jasmine.createSpyObj('AuthService', ['isLoggedIn']);
-const activatedRouteSnapshot = {} as ActivatedRouteSnapshot;
-const routerStateSnapshot = {} as RouterStateSnapshot;
 
-routerSpy.parseUrl.and.callFake(() => 'login');
+const mockAuthService = mock(AuthService);
+const authService = instance(mockAuthService);
+
+const activatedRouteSnapshot = instance(mock(ActivatedRouteSnapshot));
+const routerStateSnapshot = instance(mock(RouterStateSnapshot));
 
 describe('AuthGuard', () => {
   let guard: AuthGuard;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-        providers: [
-            { provide: AuthService, useValue: authServiceSpy },
-            { provide: Router,      useValue: routerSpy }
-          ]
+      imports: [
+        RouterTestingModule
+      ],
+      providers: [
+        { provide: AuthService, useValue: authService }
+      ]
     });
     guard = TestBed.inject(AuthGuard);
   });
@@ -29,22 +34,22 @@ describe('AuthGuard', () => {
   });
 
   describe('when user is not authenticated', () => {
-    it('should return login', () => {
-        authServiceSpy.isLoggedIn.and.callFake(() => false);
+    it('should return /login', () => {
+      when(mockAuthService.isLoggedIn()).thenReturn(false);
 
-        const result = guard.canActivate(activatedRouteSnapshot, routerStateSnapshot);
+      const result = guard.canActivate(activatedRouteSnapshot, routerStateSnapshot);
 
-        expect(result.valueOf()).toBe('login');
+      expect(result.valueOf().toString()).toEqual('/login');
     })
   });
 
   describe('when user is authenticated', () => {
     it('should return true', () => {
-        authServiceSpy.isLoggedIn.and.callFake(() => true);
+      when(mockAuthService.isLoggedIn()).thenReturn(true);
 
-        const result = guard.canActivate(activatedRouteSnapshot, routerStateSnapshot);
+      const result = guard.canActivate(activatedRouteSnapshot, routerStateSnapshot);
 
-        expect(result.valueOf()).toBeTrue();
+      expect(result.valueOf()).toBeTrue();
     })
   });
 });
