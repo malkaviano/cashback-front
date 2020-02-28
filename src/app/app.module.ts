@@ -30,6 +30,7 @@ const LOGIN_URL = "http://localhost/api/auth/login";
 const SERVER_URL = "http://localhost/api";
 const RESELLER_URL = "http://localhost/api/reseller";
 const SALES_URL = "http://localhost/api/sales";
+const CASHBACK_URL = `${SERVER_URL}/cashback`;
 
 registerLocaleData(pt);
 
@@ -70,7 +71,7 @@ registerLocaleData(pt);
   providers: [
     { provide: LOCALE_ID, useValue: 'pt' },
     { provide: AuthService, useClass: AuthService },
-    { provide: 'SERVER_URL', useValue: SERVER_URL },
+    { provide: 'CASHBACK_URL', useValue: CASHBACK_URL },
     { provide: 'LOGIN_URL', useValue: LOGIN_URL },
     { provide: 'RESELLER_URL', useValue: RESELLER_URL },
     { provide: 'SALES_URL', useValue: SALES_URL },
