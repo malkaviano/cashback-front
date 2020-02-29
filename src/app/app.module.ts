@@ -73,6 +73,7 @@ registerLocaleData(pt);
   providers: [
     { provide: LOCALE_ID, useValue: 'pt' },
     { provide: AuthService, useClass: AuthService },
+    { provide: Storage, useValue: localStorage },
     { provide: 'CASHBACK_URL', useValue: CASHBACK_URL },
     { provide: 'LOGIN_URL', useValue: LOGIN_URL },
     { provide: 'RESELLER_URL', useValue: RESELLER_URL },

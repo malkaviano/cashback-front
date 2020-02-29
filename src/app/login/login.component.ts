@@ -1,9 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
 
-import { AuthService } from '../_services/auth.service';
 import { RoutingService } from '../_services/router/routing.service';
+import { AuthenticatorService } from '../_services/auth/authenticator.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private auth: AuthService,
+    private auth: AuthenticatorService,
     private routingService: RoutingService
   ) {
     this.title = "Login";
@@ -35,6 +35,10 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(value: any): void {
-    this.auth.login(value);
+    this.auth.login(value).subscribe(
+      s => {
+        if (s) this.routingService.navTo(this.routingService.defaultPath());
+      }
+    );
   }
 }

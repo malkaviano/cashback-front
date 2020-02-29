@@ -11,6 +11,7 @@ export class RoutingService {
     @Inject('AUTH_PAGE') private authPage: string
   ) { }
 
+  // TODO: Change this to event
   navTo(url: string | UrlTree): Promise<boolean> {
     return this.router.navigateByUrl(url)
       .then(r => r)
