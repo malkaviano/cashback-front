@@ -21,7 +21,6 @@ import { SalesComponent } from './sales/sales.component';
 import { NavComponent } from './nav/nav.component';
 import { TitleComponent } from './title/title.component';
 import { LoginComponent } from './login/login.component';
-import { AuthService } from './_services/auth.service';
 import { HomeComponent } from './home/home.component';
 import { SaleFormComponent } from './_shared/modals/forms/sale-form.component';
 import { ConfirmComponent } from './_shared/modals/confirm/confirm.component';
@@ -72,7 +71,6 @@ registerLocaleData(pt);
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt' },
-    { provide: AuthService, useClass: AuthService },
     { provide: Storage, useValue: localStorage },
     { provide: 'CASHBACK_URL', useValue: CASHBACK_URL },
     { provide: 'LOGIN_URL', useValue: LOGIN_URL },

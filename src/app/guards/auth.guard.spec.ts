@@ -5,10 +5,10 @@ import { RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { instance, mock, when } from 'ts-mockito';
 
 import { AuthGuard } from './auth.guard';
-import { AuthService } from '../_services/auth.service';
+import { AuthenticatorService } from '../_services/auth/authenticator.service';
 
 
-const mockAuthService = mock(AuthService);
+const mockAuthService = mock(AuthenticatorService);
 const authService = instance(mockAuthService);
 
 const activatedRouteSnapshot = instance(mock(ActivatedRouteSnapshot));
@@ -23,7 +23,7 @@ describe('AuthGuard', () => {
         RouterTestingModule
       ],
       providers: [
-        { provide: AuthService, useValue: authService }
+        { provide: AuthenticatorService, useValue: authService }
       ]
     });
     guard = TestBed.inject(AuthGuard);
