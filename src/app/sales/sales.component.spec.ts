@@ -1,25 +1,48 @@
-// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
 
-// import { SalesComponent } from './sales.component';
+import { mock, instance } from 'ts-mockito';
+import { ToastrService } from 'ngx-toastr';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { MockComponent } from 'ng-mocks';
 
-// describe('SalesComponent', () => {
-//   let component: SalesComponent;
-//   let fixture: ComponentFixture<SalesComponent>;
+import { SalesComponent } from './sales.component';
+import { TitleComponent } from '../title/title.component';
 
-//   beforeEach(async(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [ SalesComponent ]
-//     })
-//     .compileComponents();
-//   }));
+const mockedToast = mock(ToastrService);
+const mockedBsModal = mock(BsModalService);
 
-//   beforeEach(() => {
-//     fixture = TestBed.createComponent(SalesComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
+describe('SalesComponent', () => {
+    let component: SalesComponent;
+    let fixture: ComponentFixture<SalesComponent>;
+    let httpMock: HttpTestingController;
+    let url = 'http://testeUrl';
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [
+                SalesComponent,
+                MockComponent(TitleComponent)
+            ],
+            imports: [
+                HttpClientTestingModule
+            ],
+            providers: [
+                { provide: 'SALES_URL', useValue: url },
+                { provide: ToastrService, useValue: instance(mockedToast) },
+                { provide: BsModalService, useValue: instance(mockedBsModal) },
+            ]
+        })
+            .compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(SalesComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
+});
