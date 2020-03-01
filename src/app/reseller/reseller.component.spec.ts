@@ -1,25 +1,47 @@
-// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
 
-// import { ResellerComponent } from './reseller.component';
+import { mock, instance } from 'ts-mockito';
+import { ToastrService } from 'ngx-toastr';
+import { MockComponent } from 'ng-mocks';
 
-// describe('ResellerComponent', () => {
-//   let component: ResellerComponent;
-//   let fixture: ComponentFixture<ResellerComponent>;
+import { ResellerComponent } from './reseller.component';
+import { TitleComponent } from '../title/title.component';
+import { FormsModule } from '@angular/forms';
 
-//   beforeEach(async(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [ ResellerComponent ]
-//     })
-//     .compileComponents();
-//   }));
+const mockedToast = mock(ToastrService);
 
-//   beforeEach(() => {
-//     fixture = TestBed.createComponent(ResellerComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
+describe('ResellerComponent', () => {
+    let component: ResellerComponent;
+    let fixture: ComponentFixture<ResellerComponent>;
+    let httpMock: HttpTestingController;
+    let url = 'http://testeUrl';
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [
+                ResellerComponent,
+                MockComponent(TitleComponent)
+            ],
+            imports: [
+                HttpClientTestingModule,
+                FormsModule
+            ],
+            providers: [
+                { provide: 'RESELLER_URL', useValue: url },
+                { provide: ToastrService, useValue: instance(mockedToast) }
+            ]
+        })
+            .compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(ResellerComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
+});
