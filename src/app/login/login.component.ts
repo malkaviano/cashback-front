@@ -34,11 +34,13 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  onLogin(value: any): void {
-    this.auth.login(value).subscribe(
-      s => {
-        if (s) this.routingService.navTo(this.routingService.defaultPath());
-      }
-    );
+  login(value: any): void {
+    if (this.loginForm.valid) {
+      this.auth.login(value).subscribe(
+        s => {
+          if (s) this.routingService.navTo(this.routingService.defaultPath());
+        }
+      );
+    }
   }
 }
