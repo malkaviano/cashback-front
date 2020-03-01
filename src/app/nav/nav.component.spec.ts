@@ -1,25 +1,35 @@
-// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
-// import { NavComponent } from './nav.component';
+import { mock, instance } from 'ts-mockito';
 
-// describe('NavComponent', () => {
-//   let component: NavComponent;
-//   let fixture: ComponentFixture<NavComponent>;
+import { NavComponent } from './nav.component';
+import { AuthenticatorService } from '../_services/auth/authenticator.service';
 
-//   beforeEach(async(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [ NavComponent ]
-//     })
-//     .compileComponents();
-//   }));
+const mockedAuth = mock(AuthenticatorService)
 
-//   beforeEach(() => {
-//     fixture = TestBed.createComponent(NavComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
+describe('NavComponent', () => {
+    let component: NavComponent;
+    let fixture: ComponentFixture<NavComponent>;
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [NavComponent],
+            providers: [
+                { provide: AuthenticatorService, useValue: instance(mockedAuth) }
+            ],
+            imports: [RouterTestingModule]
+        })
+            .compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(NavComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
+});
