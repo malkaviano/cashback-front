@@ -25,7 +25,8 @@ import { HomeComponent } from './home/home.component';
 import { SaleFormComponent } from './_shared/modals/forms/sale-form.component';
 import { ConfirmComponent } from './_shared/modals/confirm/confirm.component';
 
-const SERVER_URL = "http://localhost:5000/api";
+const ADDRESS = 'localhost';
+const SERVER_URL = `http://${ADDRESS}/api`;
 const LOGIN_URL = `${SERVER_URL}/auth/login`;
 const RESELLER_URL = `${SERVER_URL}/reseller`;
 const SALES_URL = `${SERVER_URL}/sales`;
@@ -59,7 +60,7 @@ registerLocaleData(pt);
         tokenGetter: () => {
           return localStorage.getItem("token");
         },
-        whitelistedDomains: ['localhost', 'localhost:5000']
+        whitelistedDomains: [ ADDRESS ]
       }
     }),
     BrowserAnimationsModule,

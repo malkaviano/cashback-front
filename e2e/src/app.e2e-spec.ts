@@ -9,7 +9,7 @@ describe('workspace-project App', () => {
   });
 
   it('should display HOME', () => {
-    page.navigateTo();
+    page.navigateToBase();
     expect(page.getTitleText()).toEqual('HOME');
   });
 

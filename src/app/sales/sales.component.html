@@ -2,7 +2,7 @@
 
 <div class="content">
     <div class="mx-auto p-2 btn-group" role="group">
-        <button type="button" class="btn btn-success" (click)="openModal()">Create</button>
+        <button type="button" class="btn btn-success create" (click)="openModal()">Create</button>
     </div>
 
     <div class="m-4">
@@ -20,7 +20,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let sale of sales">
+                <tr *ngFor="let sale of sales" id={{sale.code}}>
                     <td>{{sale.cpf}}</td>
                     <td>{{sale.code}}</td>
                     <td>{{sale.value | currency:'BRL'}}</td>
@@ -29,10 +29,10 @@
                     <td>{{sale.status}}</td>
                     <td>{{sale.data | date:'dd/MM/yyyy HH:mm:ss'}}</td>
                     <td>
-                        <button class="btn btn-success" (click)="openModal(sale)">
+                        <button class="btn btn-success edit" (click)="openModal(sale)">
                             <fa-icon [icon]="faEdit"></fa-icon>
                         </button>
-                        <button class="btn btn-danger" (click)="openDialog(sale.code)">
+                        <button class="btn btn-danger delete" (click)="openDialog(sale.code)">
                             <fa-icon [icon]="faEraser"></fa-icon>
                         </button>
                     </td>
