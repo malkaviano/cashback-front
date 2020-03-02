@@ -27,9 +27,9 @@ export class SaleFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.salesForm = this.fb.group({
-      'cpf': new FormControl({ value: this.cpf, disabled: this.update}, [Validators.required, Validators.minLength(11), Validators.maxLength(11)]),
+      'cpf': new FormControl({ value: this.cpf, disabled: this.update }, [Validators.required, Validators.minLength(11), Validators.maxLength(11)]),
       'value': new FormControl(this.value, [Validators.required, CustomValidators.number]),
-      'code': new FormControl({ value: this.code, disabled: this.update}, [Validators.required, Validators.minLength(4), Validators.maxLength(20)]),
+      'code': new FormControl({ value: this.code, disabled: this.update }, [Validators.required, Validators.minLength(4), Validators.maxLength(20)]),
       'data': new FormControl(this.data, [Validators.required, CustomValidators.date])
     });
   }
@@ -40,6 +40,8 @@ export class SaleFormComponent implements OnInit {
 
   onSave(form: any): void {
     if (!this.salesForm.valid) return;
+
+    if (this.update) Object.assign(form, { code: this.salesForm.controls['code'].value });
 
     this.notifyParent.emit(form);
 
