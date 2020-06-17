@@ -1,3 +1,5 @@
+[![CodeFactor](https://www.codefactor.io/repository/github/malkaviano/cashback-front/badge)](https://www.codefactor.io/repository/github/malkaviano/cashback-front)
+
 # CashbackFront
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.3.
